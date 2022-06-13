@@ -29,8 +29,13 @@
                 @forelse ($books as $book)
                     <tr>
                         <th>{{ $book->id }}</th>
-                        <td><a
-                                href="{{ route('admin.authors.show', $book->Author->id) }}">{{ $book->Author->name . ' ' . $book->Author->last_name }}</a>
+                        <td>
+                            @if ($book->author_id != null)
+                                <a
+                                    href="{{ route('admin.authors.show', $book->Author->id) }}">{{ $book->Author->name . ' ' . $book->Author->last_name }}</a>
+                            @else
+                                Autore indefinito
+                            @endif
                         </td>
                         <td>{{ $book->title }}</td>
                         <td>

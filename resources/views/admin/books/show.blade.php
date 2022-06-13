@@ -11,7 +11,11 @@
 
         <div class="card text-center">
             <div class="card-header">
-                <h2 class="card-text">{{ $book->Author->name . ' ' . $book->Author->last_name }}</h2>
+                @if ($book->author_id != null)
+                    <h2 class="card-text">{{ $book->Author->name . ' ' . $book->Author->last_name }}</h2>
+                @else
+                    <h2>Autore indefinito</h2>
+                @endif
                 <h2>{{ $book->title }}</h2>
             </div>
             <div class="card-body">

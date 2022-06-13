@@ -28,7 +28,9 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        $books = Book::where('author_id', null)->get();
+
+        return view('admin.authors.create', compact('books'));
     }
 
     /**
@@ -37,9 +39,18 @@ class AuthorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Book $book)
     {
-        //
+        $data = $request->all();
+        $new_author = new Author();
+        $new_author->fill($data);
+        $new_author->save();
+        // $author_id = $new_author['id'];
+
+        // $selectedBooks = $new_author['books']->pluck('id')->toArray();
+        // dd($selectedBooks);
+
+        return redirect()->route('admin.authors.index', $new_author)->with('message', "L'autore $new_author->name $new_author->last_name è stato creato con successo");
     }
 
     /**
@@ -77,10 +88,9 @@ class AuthorController extends Controller
     {
         $data = $request->all();
 
-        $author->fill($data);
-        $author->save();
+        $author->update($data);
 
-        return redirect()->route('admin.authors.show', $author);
+        return redirect()->route('admin.authors.show', compact('author'))->with('message', "Hai modificato l'autore $author->name $author->last_name correttamente");
     }
 
     /**
@@ -89,8 +99,10 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Author $author)
     {
-        //
+        $author->delete();
+
+        return redirect()->route('admin.authors.index', compact('author'))->with('message', "Hai eliminato l'autore $author->name $author->last_name correttamente");
     }
 }

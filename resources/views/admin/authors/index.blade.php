@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        {{-- <a href=" {{ Route('admin.authors.create') }} " class="btn btn-success mb-4">Crea</a> --}}
+        <a href=" {{ Route('admin.authors.create') }} " class="btn btn-success mb-4">Crea</a>
 
         <table class="table table-dark">
 
@@ -31,7 +31,7 @@
                         <th>{{ $author->id }}</th>
                         <td>{{ $author->name }}</td>
                         <td>{{ $author->last_name }}</td>
-                        <td>{{ $author->life_story }}</td>
+                        <td class="col-2">{{ $author->life_story }}</td>
                         <td>{{ $author->author_year }}</td>
                         <td>
                             @foreach ($books as $book)
@@ -40,7 +40,15 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td><a href="{{ route('admin.authors.show', $author->id) }}" class="btn btn-success">View</a>
+                        <td>
+                            <a href="{{ route('admin.authors.show', $author->id) }}" class="btn btn-success">View</a>
+                            <a href="{{ route('admin.authors.edit', $author->id) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('admin.authors.destroy', $author->id) }}" class="d-inline-block"
+                                method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </td>
                     @empty
                         <h2>Non ci sono dati nella tabella</h2>

@@ -29,6 +29,7 @@ class BookController extends Controller
      */
     public function create()
     {
+
         $genres = Genre::All();
         $authors = Author::All();
 
