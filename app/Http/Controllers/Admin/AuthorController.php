@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Author;
+use App\Models\Book;
 
 class AuthorController extends Controller
 {
@@ -14,7 +16,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::all();
+        $books = Book::all();
+        return view('admin.authors.index', compact('authors', 'books'));
     }
 
     /**
@@ -44,9 +48,11 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Author $author)
     {
-        //
+        $books = Book::all();
+
+        return view('admin.authors.show', compact('author', 'books'));
     }
 
     /**
@@ -55,9 +61,9 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Author $author)
     {
-        //
+        return view('admin.authors.edit', compact('author'));
     }
 
     /**
@@ -67,9 +73,14 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Author $author)
     {
-        //
+        $data = $request->all();
+
+        $author->fill($data);
+        $author->save();
+
+        return redirect()->route('admin.authors.show', $author);
     }
 
     /**

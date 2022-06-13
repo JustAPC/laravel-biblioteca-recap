@@ -15,10 +15,10 @@ class CreateBookGenreTable extends Migration
     {
         Schema::create('book_genre', function (Blueprint $table) {
             $table->unsignedBigInteger('book_id');
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('set null')->constrained();
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade')->constrained();
 
             $table->unsignedBigInteger('genre_id');
-            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('set null')->constrained();
+            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade')->constrained();
         });
     }
 

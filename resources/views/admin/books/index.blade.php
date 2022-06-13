@@ -29,7 +29,9 @@
                 @forelse ($books as $book)
                     <tr>
                         <th>{{ $book->id }}</th>
-                        {{-- <td>{{ $book->Author->name . ' ' . $book->Author->last_name }}</td> --}}
+                        <td><a
+                                href="{{ route('admin.authors.show', $book->Author->id) }}">{{ $book->Author->name . ' ' . $book->Author->last_name }}</a>
+                        </td>
                         <td>{{ $book->title }}</td>
                         <td>
                             <img src="{{ $book->image }}" alt="{{ $book->title }}" width="80">

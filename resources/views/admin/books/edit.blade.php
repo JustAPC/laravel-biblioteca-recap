@@ -30,14 +30,14 @@
                 {{ old('description', $book->description) }}
             </textarea>
                 <div class="float-right">
-                    {{-- <label for="category">Category:</label>
-                    <select name="category_id" id="category">
-                        <option value="">Seleziona una Categoria...</option>
-                        @foreach ($categories as $category)
-                            <option @if (old('category_id', $post->category_id) == $category->id) selected @endif value=" {{ $category->id }} ">
-                                {{ $category->label }}</option>
+                    <label for="author">Autore:</label>
+                    <select name="author_id" id="author">
+                        <option value="">Seleziona un Autore...</option>
+                        @foreach ($authors as $author)
+                            <option @if (old('author_id', $book->author_id) == $author->id) selected @endif value=" {{ $author->id }} ">
+                                {{ $author->name . ' ' . $author->last_name }}</option>
                         @endforeach
-                    </select> --}}
+                    </select>
 
                     <p class="pt-5">Genres:</p>
                     @foreach ($genres as $genre)

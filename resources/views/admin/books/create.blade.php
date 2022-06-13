@@ -27,11 +27,11 @@
 
                 <div class="float-right">
 
-                    <label for="author">Author</label>
+                    <label for="author">Autore:</label>
                     <select name="author_id" id="author">
                         <option value="">Seleziona un Autore...</option>
                         @foreach ($authors as $author)
-                            <option value=" {{ $author->id }} ">
+                            <option @if (old('author_id') == $author->id) selected @endif value=" {{ $author->id }} ">
                                 {{ $author->name . ' ' . $author->last_name }}</option>
                         @endforeach
                     </select>
@@ -40,7 +40,8 @@
                     @foreach ($genres as $genre)
                         <div class="form-check form-check-inline">
                             <input type="checkbox" class="form-check-input" id="{{ $genre->name }}-genre"
-                                value="{{ $genre->id }}" name="genre[]" @if (in_array($genre->id, old('genres', []))) checked @endif>
+                                value="{{ $genre->id }}" name="genres[]"
+                                @if (in_array($genre->id, old('genres', []))) checked @endif>
                             <label for="{{ $genre->id }}-genre" class="form-check-label">{{ $genre->name }}</label>
                         </div>
                     @endforeach

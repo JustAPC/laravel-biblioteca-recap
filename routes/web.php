@@ -23,7 +23,8 @@ Route::middleware('auth')
     ->name('admin.')
     ->prefix('admin')
     ->namespace('Admin')
-    ->group(function(){
+    ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('books', 'BookController');
-});
+        Route::resource('authors', 'AuthorController');
+    });
