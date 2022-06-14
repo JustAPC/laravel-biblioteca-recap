@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        <a href=" {{ Route('admin.authors.create') }} " class="btn btn-success mb-4">Crea</a>
+        <a href=" {{ Route('admin.authors.create') }} " class="btn btn-success mb-4">Crea Autore</a>
 
         <table class="table table-dark">
 
